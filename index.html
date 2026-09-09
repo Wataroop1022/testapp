@@ -28,6 +28,7 @@
     --p-jcp: #e34948;      /* 日本共産党 */
     --p-inochi: #e87ba4;   /* いのちの党（旧れいわ新選組） */
     --p-sansei: #008300;   /* 参政党 */
+    --p-chukai: #6b7a99;   /* 中道改革連合（立憲・公明合流の一時会派） */
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -55,6 +56,7 @@
       --p-jcp: #e66767;
       --p-inochi: #d55181;
       --p-sansei: #2fae2f;
+      --p-chukai: #93a3c4;
     }
   }
   :root[data-theme="dark"]{
@@ -82,6 +84,7 @@
     --p-jcp: #e66767;
     --p-inochi: #d55181;
     --p-sansei: #2fae2f;
+    --p-chukai: #93a3c4;
   }
 
   *{ box-sizing: border-box; }
@@ -216,7 +219,7 @@
     display:flex; flex-wrap:wrap; gap: 6px 10px; font-size: 12px; color: var(--text-secondary);
   }
   .party-meta span{ display:inline-flex; align-items:center; gap:5px; }
-  .party-meta .lbl{ color: var(--text-muted); }
+  .party-meta .lbl{ color: var(--text-muted); white-space: nowrap; }
   .party-desc{ font-size: 13px; line-height: 1.75; color: var(--text-secondary); flex: 1; }
   .party-link{
     align-self: flex-start;
@@ -270,10 +273,11 @@
     <div class="eyebrow"><span class="dot"></span>国会・政党情報ポータル</div>
     <h1 class="mincho">国会政党ウォッチ</h1>
     <p class="lede">
-      衆参両院に議席を持つ主要政党の党首・結党年・公式発信先と、両院の会派別議席構成をひとつにまとめました。
-      国会審議や政治資金の一次情報は速報性が命なので、下部の「活動を追う」から各院・省庁の公式ページへ直接アクセスできるようにしています。
+      2026年2月8日投開票の第51回衆議院議員総選挙の結果と、両院の最新会派構成をもとに主要政党の党首・結党年・公式発信先をまとめました。
+      この選挙前後で「立憲民主党・公明党の合流と分裂」「れいわ新選組の改称」など党の枠組み自体が大きく動いたため、
+      その経緯もあわせて記載しています。国会審議や政治資金の一次情報は速報性が命なので、下部の「活動を追う」から各院・省庁の公式ページへ直接アクセスできるようにしています。
     </p>
-    <div class="asof-badge">情報基準日: <b>2026年9月9日</b> 時点の公開情報にもとづく</div>
+    <div class="asof-badge">情報最終確認日: <b>2026年9月9日</b> 時点の公開情報にもとづく</div>
   </div>
 </header>
 
@@ -282,25 +286,27 @@
     <div class="section-head">
       <div class="kicker">Composition</div>
       <h2>両院の会派別議席構成</h2>
-      <p>会派（院内での議員団）単位の議席数です。複数政党が合同で会派を組んでいる場合はその旨を併記しています。バーにカーソルを合わせると詳細が出ます。</p>
+      <p>衆議院は2026年2月の総選挙そのものの結果、参議院は会派（院内の議員団）単位の議席数です。バーにカーソルを合わせると詳細が出ます。</p>
     </div>
 
     <div class="chart-grid">
       <div class="chart-card">
-        <h3>衆議院（定数465）</h3>
-        <div class="chart-sub">出典: 衆議院公式サイト「会派名及び会派別所属議員数」</div>
+        <h3>衆議院 総選挙結果（定数465・2026年2月8日投開票）</h3>
+        <div class="chart-sub">出典: 日本経済新聞・nippon.com の選挙結果報道</div>
         <div class="bars" id="bars-shugiin"></div>
         <div class="chart-foot">
-          「その他」＝そうぞう・みらい11、日本新党・無所属4、無所属7の合計。院内会派名を尊重し、政党単位に分解していません。
-          最新値は <a href="https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/shiryo/kaiha_m.htm" target="_blank" rel="noopener">衆議院サイト</a> で確認してください。
+          自民党が単独で戦後初めて衆院定数の3分の2超を獲得。灰色のバーは政党要件を失った、または今回のみの一過性の会派・無所属です。
+          中道改革連合は立憲民主党と公明党が2026年1月に合流して結成、選挙後は全面合流を延期し事実上分党しました（詳細は下の政党ディレクトリを参照）。
+          現在の会派構成は <a href="https://www.shugiin.go.jp/internet/itdb_annai.nsf/html/statics/shiryo/kaiha_m.htm" target="_blank" rel="noopener">衆議院サイト</a> で確認してください。
         </div>
       </div>
 
       <div class="chart-card">
-        <h3>参議院（定数248）</h3>
+        <h3>参議院 会派構成（定数248・2025年7月の通常選挙時点）</h3>
         <div class="chart-sub">出典: 参議院会派別所属議員数・報道（2025年7月29日時点）</div>
         <div class="bars" id="bars-sangiin"></div>
         <div class="chart-foot">
+          衆議院とは別の選挙・別のタイミングの数字です。参議院議員は今回の中道改革連合への合流対象外だったため、党名はそのまま。
           「立憲・社民・無所属」は3会派合同の院内会派、「その他」＝日本保守党2、沖縄の風2、無所属7の合計。
           最新値は <a href="https://www.sangiin.go.jp/japanese/joho1/kousei/giin/current/giinsu.htm" target="_blank" rel="noopener">参議院サイト</a> で確認してください。
         </div>
@@ -314,7 +320,7 @@
     <div class="section-head">
       <div class="kicker">Directory</div>
       <h2>政党ディレクトリ</h2>
-      <p>国政に議席を持つ11党を掲載。左端の色は上のグラフと対応しています（単独会派として議席数を特定できる8党のみ着色、残る3党は無色）。</p>
+      <p>国政に議席を持つ11党を掲載。左端の色は上のグラフと対応しています（一定の議席を持つ9党のみ着色、新興・少数の2党は無色）。</p>
     </div>
 
     <div class="party-grid" id="party-grid"></div>
@@ -358,7 +364,7 @@
         本ページは公開情報をもとに作成した参考資料であり、いずれの政党・候補者を支持または推奨するものではありません。
         誤り・更新遅れに気づいた場合は各公式サイトの情報を優先してください。
       </div>
-      <div><b>国会政党ウォッチ</b> — 情報基準日 2026年9月9日</div>
+      <div><b>国会政党ウォッチ</b> — 情報最終確認日 2026年9月9日</div>
     </div>
   </div>
 </footer>
@@ -384,12 +390,16 @@ function bar(name, seats, total, color, note){
 }
 
 const shugiinData = [
-  ['自由民主党・無所属の会', 316, 'var(--p-ldp)', ''],
-  ['立憲民主党・無所属', 48, 'var(--p-cdp)', ''],
+  ['自由民主党', 316, 'var(--p-ldp)', '戦後最多、単独で定数の3分の2超'],
+  ['中道改革連合', 49, 'var(--p-chukai)', '立憲民主党・公明党が合流した新党。公示前172から大幅減'],
   ['日本維新の会', 36, 'var(--p-isin)', ''],
-  ['公明党・無所属クラブ', 28, 'var(--p-komei)', ''],
-  ['日本共産党', 15, 'var(--p-jcp)', ''],
-  ['その他会派', 22, 'var(--chip-other)', 'そうぞう・みらい／日本新党・無所属／無所属'],
+  ['国民民主党', 28, 'var(--p-dpfp)', ''],
+  ['参政党', 15, 'var(--p-sansei)', ''],
+  ['チームみらい', 11, 'var(--chip-other)', '2026年衆院選で初議席'],
+  ['日本共産党', 4, 'var(--p-jcp)', ''],
+  ['無所属', 4, 'var(--chip-other)', ''],
+  ['れいわ新選組', 1, 'var(--p-inochi)', '選挙後の2026年8月に「いのちの党」へ改称'],
+  ['減税日本・ゆうこく連合', 1, 'var(--chip-other)', '得票率2%未満で政党要件を喪失'],
 ];
 const shugiinTotal = 465;
 const bs = document.getElementById('bars-shugiin');
@@ -412,38 +422,38 @@ sangiinData.forEach(([n,s,c,note]) => bg.appendChild(bar(n,s,sangiinTotal,c,note
 
 const parties = [
   { name:'自由民主党', short:'自民党', leader:'高市早苗（総裁）', founded:'1955年', color:'var(--p-ldp)',
-    desc:'保守系。1955年の結党以来ほぼ一貫して政権を担ってきた日本最大の政党。',
+    desc:'保守系。1955年の結党以来ほぼ一貫して政権を担ってきた日本最大の政党。2026年2月の総選挙で単独過去最多の316議席を獲得し、戦後初めて定数の3分の2を超えた。',
     seats:'衆316・参101', url:'https://www.jimin.jp/' },
-  { name:'立憲民主党', short:'立憲', leader:'水岡俊一（代表）', founded:'2020年', color:'var(--p-cdp)',
-    desc:'中道からリベラルまでを含む野党第一党。国会論戦の主軸を担う。',
+  { name:'立憲民主党', short:'立憲', leader:'水岡俊一（代表）', founded:'2020年（2026年に再結成）', color:'var(--p-cdp)',
+    desc:'中道からリベラルまでを含む野党第一党。2026年1月に公明党と合流して「中道改革連合」を結成したが総選挙で大敗し、全面合流を延期したうえで党を再結成した。',
     seats:'衆48（会派）', url:'https://cdp-japan.jp/' },
   { name:'日本維新の会', short:'維新', leader:'吉村洋文（代表）', founded:'2015年', color:'var(--p-isin)',
-    desc:'大阪発の改革保守系政党。行政改革・地方分権・規制改革を重視。',
+    desc:'大阪発の改革保守系政党。行政改革・地方分権・規制改革を重視。2026年総選挙で議席を伸ばし自民党と連立を組む。',
     seats:'衆36・参19', url:'https://o-ishin.jp/' },
-  { name:'公明党', short:'公明', leader:'竹谷とし子（代表）', founded:'1964年', color:'var(--p-komei)',
-    desc:'福祉・平和外交を重視する中道政党。長らく自民党と連立政権を組む。',
+  { name:'公明党', short:'公明', leader:'竹谷とし子（代表）', founded:'1964年（2026年に活動再開）', color:'var(--p-komei)',
+    desc:'福祉・平和外交を重視する中道政党。2026年1月に立憲民主党と合流し「中道改革連合」を結成したが、総選挙後に分党して公明党として活動を再開した。',
     seats:'衆28（会派）・参21', url:'https://www.komei.or.jp/' },
   { name:'国民民主党', short:'国民民主', leader:'玉木雄一郎（代表）', founded:'2020年', color:'var(--p-dpfp)',
-    desc:'「対決より解決」を掲げる中道政党。個別政策ごとの是々非々路線が特徴。',
-    seats:'参25（会派）', url:'https://new-kokumin.jp/' },
+    desc:'「対決より解決」を掲げる中道政党。個別政策ごとの是々非々路線が特徴。2026年総選挙では中道改革連合への不合流を選び単独で議席を伸ばした。',
+    seats:'衆28・参25（会派）', url:'https://new-kokumin.jp/' },
   { name:'日本共産党', short:'共産党', leader:'田村智子（委員長）', founded:'1922年', color:'var(--p-jcp)',
-    desc:'現存する日本最古の政党。護憲・格差是正・大企業への規制強化を主張。',
-    seats:'衆15・参7', url:'https://www.jcp.or.jp/' },
+    desc:'現存する日本最古の政党。護憲・格差是正・大企業への規制強化を主張。2026年総選挙では議席を減らした。',
+    seats:'衆4・参7', url:'https://www.jcp.or.jp/' },
   { name:'いのちの党（旧れいわ新選組）', short:'いのち', leader:'山本譲司（代表）', founded:'2019年（2026年8月に改称）', color:'var(--p-inochi)',
-    desc:'消費税減税・積極財政を掲げる政党。2026年8月に党名を「れいわ新選組」から変更。',
-    seats:'参6', url:'https://reiwa-shinsengumi.com/' },
+    desc:'消費税減税・積極財政を掲げる政党。2026年2月の総選挙は「れいわ新選組」名で戦い衆院1議席にとどまった。同年7月に山本太郎氏が代表辞任・政界引退を表明し、8月に党名を「いのちの党」へ変更。',
+    seats:'衆1・参6', url:'https://reiwa-shinsengumi.com/' },
   { name:'参政党', short:'参政党', leader:'神谷宗幣（代表）', founded:'2020年', color:'var(--p-sansei)',
-    desc:'教育・食・健康・国防を重視する新興保守系政党。党員参加型の運営を掲げる。',
-    seats:'参15', url:'https://sanseito.jp/' },
-  { name:'社会民主党', short:'社民党', leader:'福島瑞穂（党首）', founded:'1996年（前身の日本社会党は1945年結成）', color:null,
-    desc:'護憲・平和主義・労働者保護を掲げる革新政党。',
-    seats:'参は立憲などとの合同会派に参加', url:'https://sdp.or.jp/' },
+    desc:'教育・食・健康・国防を重視する新興保守系政党。党員参加型の運営を掲げ、2026年総選挙・前年の参院選ともに議席を伸ばした。',
+    seats:'衆15・参15', url:'https://sanseito.jp/' },
+  { name:'社会民主党', short:'社民党', leader:'福島瑞穂（党首）', founded:'1996年（前身は1945年）', color:null,
+    desc:'護憲・平和主義・労働者保護を掲げる革新政党。2026年総選挙で衆議院の議席をすべて失った。',
+    seats:'衆0・参は立憲などとの合同会派に参加', url:'https://sdp.or.jp/' },
   { name:'チームみらい', short:'みらい', leader:'安野貴博（党首）', founded:'2025年', color:null,
-    desc:'テクノロジー・AIを政策形成に活用することを掲げる新興政党。2026年衆院選で初議席。',
-    seats:'衆・参 各議席あり', url:'https://team-mir.ai/' },
-  { name:'中道改革連合', short:'中道', leader:'小川淳也（代表）', founded:'2026年', color:null,
-    desc:'中道勢力の結集を目指して2026年に発足した政党。他会派との連携を模索中。',
-    seats:'非公表・変動中', url:'https://craj.jp/' },
+    desc:'テクノロジー・AIを政策形成に活用することを掲げる新興政党。2026年総選挙で衆院に初めて議席を獲得した。党首の安野氏本人は参議院議員。',
+    seats:'衆11・参1', url:'https://team-mir.ai/' },
+  { name:'中道改革連合', short:'中道', leader:'小川淳也（代表）', founded:'2026年1月', color:'var(--p-chukai)',
+    desc:'高市首相の解散表明直前、立憲民主党と公明党が合流して結党。公示前172議席から総選挙で49議席へ大敗し、上院議員・地方議員を含む全面合流を延期。事実上、立憲系・公明系がそれぞれの党名で分党した後も、小川氏のグループが「中道改革連合」として存続している。',
+    seats:'衆49（総選挙時）→分党後は非公表', url:'https://craj.jp/' },
 ];
 
 const grid = document.getElementById('party-grid');
