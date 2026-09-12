@@ -1,8 +1,9 @@
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 // service-role key は RLS を完全にバイパスする。
-// このファイルは scripts/ 専用 — app/ や components/ から絶対にimportしないこと。
-// （Next.jsアプリ内でimportするとクライアントバンドルに漏れる危険がある）
+// サーバー専用コード(scripts/ や app/api/.../route.ts のようなRoute Handler)からのみ
+// importすること。"use client"なコンポーネントやクライアントバンドルに含まれる
+// コードから絶対にimportしない（ブラウザに鍵が漏れる）。
 export function createServiceRoleClient() {
   const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
