@@ -20,10 +20,16 @@ export async function signUp(
   }
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signUp({ email, password });
+  const { data, error } = await supabase.auth.signUp({ email, password });
 
   if (error) {
     return { error: error.message };
+  }
+
+  // メール確認が必須の設定なら session は null(確認メール待ち)。
+  // 確認不要の設定(お試し環境など)なら signUp() の時点で session が張られる。
+  if (data.session) {
+    redirect("/member");
   }
 
   redirect("/signup/check-email");
